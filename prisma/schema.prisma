@@ -9,3 +9,76 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Vocabulary {
+  id          Int        @id @default(autoincrement())
+  name        String
+  groupId     Int
+  description String
+  sentence    String
+  active      Boolean    @default(true)
+  // if vocabulary should be practiced
+  speechPart  String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  categorie   SpeechPart
+  favorite    Boolean    @default(false)
+  isKnown     Boolean    @default(false)
+}
+
+model Package {
+  id                 Int             @id @default(autoincrement())
+  name               String
+  foreignLanguage    String
+  translatedLanguage String
+  users              UserOnPackage[]
+  groups             Group[]
+}
+
+model Group {
+  id          Int     @id @default(autoincrement())
+  name        String
+  packageId   Int
+  package     Package @relation(fields: [packageId], references: [id])
+  description String
+  active      Boolean @default(true)
+}
+
+model User {
+  id        Int             @id @default(autoincrement())
+  username  String
+  mail      String          @unique
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  packages  UserOnPackage[]
+  disabled  Boolean         @default(false)
+}
+
+model UserOnPackage {
+  userOwnerId      Int
+  userOwner        User         @relation(fields: [userOwnerId], references: [id])
+  packageId        Int
+  package          Package      @relation(fields: [packageId], references: [id])
+  assignedAt       DateTime?    @default(now())
+  assignedByUserId Int?
+  PackageRights    PackageRight
+
+  @@id([userOwnerId, packageId])
+}
+
+enum PackageRight {
+  VIEW
+  EDIT
+  ADMIN
+}
+
+enum SpeechPart {
+  NOUN
+  PRONOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PREPOSITION
+  CONJUNCTION
+  INTERJECTION
+}

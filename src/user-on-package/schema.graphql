@@ -1,0 +1,25 @@
+type IUserOnPackage {
+    userId: ID!
+    packageId: ID!
+    packageRight: PackageRight!
+    createdAt: Date!
+    updatedAt: Date!
+}
+
+input INewUserOnPackage {
+    userId: ID!
+    packageId: ID!
+}
+
+
+type Mutation {
+    createNewUserOnPackage (input: INewUserOnPackage): Int
+    #    updateGroup (input: IUpdateGroup): IGroup!
+    #    deleteGroup (id: ID): IGroup!
+}
+
+enum PackageRight {
+    VIEW
+    EDIT
+    ADMIN
+}

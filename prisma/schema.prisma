@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Vocabulary {
-  id          Int         @id @default(autoincrement())
+  id          String      @id @default(uuid())
   name        String
-  updatedAt   DateTime    @updatedAt
   createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   active      Boolean     @default(true)
   favorite    Boolean     @default(false)
   isKnown     Boolean     @default(false)
-  groupId     Int
+  groupId     String
   group       Group       @relation(fields: [groupId], references: [id])
   categorie   SpeechPart?
   description String?
@@ -26,44 +26,50 @@ model Vocabulary {
 }
 
 model Package {
-  id                 Int             @id @default(autoincrement())
+  id                 String          @id @default(uuid())
   name               String
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
   foreignLanguage    String
   translatedLanguage String
-  users              UserOnPackage[]
+  usersOnPackage     UserOnPackage[]
   groups             Group[]
 }
 
 model Group {
-  id          Int          @id @default(autoincrement())
-  name        String
-  active      Boolean      @default(true)
-  packageId   Int
-  package     Package      @relation(fields: [packageId], references: [id])
-  description String?
-  Vocabulary  Vocabulary[]
+  id           String       @id @default(uuid())
+  name         String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  active       Boolean      @default(true)
+  packageId    String
+  package      Package      @relation(fields: [packageId], references: [id])
+  description  String?
+  vocabularies Vocabulary[]
 }
 
 model User {
-  id        Int             @id @default(autoincrement())
-  username  String
-  mail      String          @unique
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  packages  UserOnPackage[]
-  disabled  Boolean         @default(false)
+  id             String          @id @default(uuid())
+  username       String
+  mail           String          @unique
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  userOnPackages UserOnPackage[]
+  disabled       Boolean         @default(false)
 }
 
 model UserOnPackage {
-  userOwnerId      Int
-  userOwner        User         @relation(fields: [userOwnerId], references: [id])
-  packageId        Int
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  packageId        String
   package          Package      @relation(fields: [packageId], references: [id])
   assignedAt       DateTime?    @default(now())
-  assignedByUserId Int?
+  assignedByUserId String?
   PackageRights    PackageRight
 
-  @@id([userOwnerId, packageId])
+  @@id([userId, packageId])
 }
 
 enum PackageRight {

@@ -1,0 +1,36 @@
+type IGroup {
+    id: ID!
+    name: String!
+    createdAt: Date!
+    updatedAt: Date!
+    active: Boolean!
+    packageId: ID!
+#    package: IPackage!
+    description: String
+#    vocabularies: [IVocabulary!]!
+}
+
+input INewGroup {
+    name: String!
+    active: Boolean
+    packageId: ID!
+    description: String
+}
+
+input IUpdateGroup {
+    id: ID!
+    name: String
+    active: Boolean
+    packageId: ID
+    description: String
+}
+
+type Query {
+    groupById(id: ID!): IGroup
+}
+
+type Mutation {
+    createGroup (input: INewGroup): IGroup!
+    updateGroup (input: IUpdateGroup): IGroup!
+    deleteGroup (id: ID): IGroup!
+}

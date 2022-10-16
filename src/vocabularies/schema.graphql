@@ -1,0 +1,55 @@
+type IVocabulary {
+    id: ID!
+    name: String!
+    updatedAt: Date!
+    createdAt: Date!
+    active: Boolean!
+    favorite: Boolean!
+    isKnown: Boolean!
+    categorie: SpeechPart
+    description: String
+    sentence: String
+}
+
+input INewVocabulary {
+    name: String!
+    groupId: ID!
+    active: Boolean
+    favorite: Boolean
+    isKnown: Boolean
+    categorie: SpeechPart
+    description: String
+    sentence: String
+}
+
+input IUpdateVocabulary {
+    id: ID!
+    name: String
+    active: Boolean
+    favorite: Boolean
+    isKnown: Boolean
+    categorie: SpeechPart
+    description: String
+    sentence: String
+}
+
+type Query {
+    vocabularyById(id: ID!): IVocabulary
+}
+
+type Mutation {
+    createVocabulary(input: INewVocabulary): IVocabulary!
+    updateVocabulary (input: IUpdateVocabulary): IVocabulary!
+    deleteVocabulary (id: ID): IVocabulary!
+}
+
+enum SpeechPart{
+    NOUN
+    PRONOUN
+    VERB
+    ADJECTIVE
+    ADVERB
+    PREPOSITION
+    CONJUNCTION
+    INTERJECTION
+}

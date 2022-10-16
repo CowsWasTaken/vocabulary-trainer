@@ -1,0 +1,34 @@
+type IUser {
+    id: ID!
+    createdAt: Date!
+    updatedAt: Date!
+    username: String!
+    disabled: Boolean
+    mail: String!
+#    userOnPackages: [IUserOnPackage!]!
+}
+
+type IPublicUser {
+    username: String!
+}
+
+input INewUser {
+    username: String!
+    mail: String!
+}
+
+input IUpdateUser {
+    id: ID!
+    username: String
+    mail: String
+}
+
+type Query {
+    me: IUser
+}
+
+type Mutation {
+    createUser(input: INewUser): IUser!
+    updateUser(input: IUpdateUser): IUser!
+    deleteUser(id: ID): IUser!
+}

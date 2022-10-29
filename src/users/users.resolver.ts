@@ -1,15 +1,17 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { INewUser, IUpdateUser, IUser } from '../graphql.schema';
-import { NotImplementedException } from '@nestjs/common';
 
-@Resolver()
+@Resolver('IUser')
 export class UsersResolver {
   constructor(private usersService: UsersService) {}
 
   @Query('me')
-  async me(): Promise<IUser> {
-    throw new NotImplementedException();
+  async me(@Args('input') args: string): Promise<IUser> {
+    const entity = await this.usersService.findOne(args);
+    return {
+      ...entity,
+    };
   }
 
   @Mutation('createUser')

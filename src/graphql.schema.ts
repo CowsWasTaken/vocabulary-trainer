@@ -106,7 +106,7 @@ export interface IQuery {
     __typename?: 'IQuery';
     groupById(id: string): Nullable<IGroup> | Promise<Nullable<IGroup>>;
     packageById(id: string): Nullable<IPackage> | Promise<Nullable<IPackage>>;
-    me(): Nullable<IUser> | Promise<Nullable<IUser>>;
+    me(input: string): IUser | Promise<IUser>;
     vocabularyById(id: string): Nullable<IVocabulary> | Promise<Nullable<IVocabulary>>;
 }
 
@@ -154,6 +154,7 @@ export interface IUser {
     username: string;
     disabled?: Nullable<boolean>;
     mail: string;
+    packages?: Nullable<IPackage[]>;
 }
 
 export interface IPublicUser {

@@ -5,6 +5,7 @@ type IUser {
     username: String!
     disabled: Boolean
     mail: String!
+    packages: [IPackage!]
 #    userOnPackages: [IUserOnPackage!]!
 }
 
@@ -24,7 +25,7 @@ input IUpdateUser {
 }
 
 type Query {
-    me: IUser
+    me(input: ID!): IUser!
 }
 
 type Mutation {

@@ -27,4 +27,12 @@ export class PackagesService {
       data: updatePackage,
     });
   }
+
+  async findOne(packageId: string) {
+    return this.prisma.package.findUnique({
+      where: {
+        id: packageId,
+      },
+    });
+  }
 }

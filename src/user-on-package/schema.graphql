@@ -4,12 +4,18 @@ type IUserOnPackage {
     packageRight: PackageRight!
     createdAt: Date!
     updatedAt: Date!
+    user: IPublicUser!
+    package: IPackage!
 }
 
 input INewUserOnPackage {
     userId: ID!
     packageId: ID!
     packageRight: PackageRight!
+}
+
+type Query {
+    packagesForUser(userId: ID!) : [IUserOnPackage!]!
 }
 
 

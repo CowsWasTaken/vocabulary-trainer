@@ -15,17 +15,25 @@ export class UserOnPackageService {
         data: {
           userId,
           packageId,
-          PackageRights: packageRight,
+          packageRight,
         },
       });
     }
   }
 
   private async findExisting(userId: string, packageId: string) {
-    return await this.prisma.userOnPackage.findFirst({
+    return this.prisma.userOnPackage.findFirst({
       where: {
         userId,
         packageId,
+      },
+    });
+  }
+
+  async packagesForUser(userId: string) {
+    return this.prisma.userOnPackage.findMany({
+      where: {
+        userId,
       },
     });
   }

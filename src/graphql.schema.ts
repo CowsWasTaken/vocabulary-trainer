@@ -1,4 +1,3 @@
-
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -107,6 +106,7 @@ export interface IQuery {
     __typename?: 'IQuery';
     groupById(id: string): Nullable<IGroup> | Promise<Nullable<IGroup>>;
     packageById(id: string): Nullable<IPackage> | Promise<Nullable<IPackage>>;
+    packagesForUser(userId: string): IUserOnPackage[] | Promise<IUserOnPackage[]>;
     me(input: string): IUser | Promise<IUser>;
     vocabularyById(id: string): Nullable<IVocabulary> | Promise<Nullable<IVocabulary>>;
 }
@@ -145,6 +145,8 @@ export interface IUserOnPackage {
     packageRight: PackageRight;
     createdAt: Date;
     updatedAt: Date;
+    user: IPublicUser;
+    package: IPackage;
 }
 
 export interface IUser {
@@ -160,6 +162,7 @@ export interface IUser {
 
 export interface IPublicUser {
     __typename?: 'IPublicUser';
+    id: string;
     username: string;
 }
 

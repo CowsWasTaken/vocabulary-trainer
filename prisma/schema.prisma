@@ -67,7 +67,7 @@ model UserOnPackage {
   package          Package      @relation(fields: [packageId], references: [id])
   assignedAt       DateTime?    @default(now())
   assignedByUserId String?
-  PackageRights    PackageRight
+  packageRight     PackageRight
 
   @@id([userId, packageId])
 }

@@ -1,10 +1,18 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { UserOnPackageService } from './user-on-package.service';
 import { INewUserOnPackage } from '../graphql.schema';
+import { Parent } from '@nestjs/graphql';
+import { UserOnPackage } from '@prisma/client';
+import { UsersService } from '../users/users.service';
+import { PackagesService } from '../packages/packages.service';
 
 @Resolver('IUserOnPackage')
 export class UserOnPackageResolver {
-  constructor(private userOnPackageService: UserOnPackageService) {}
+  constructor(
+    private userOnPackageService: UserOnPackageService,
+    private usersService: UsersService,
+    private packagesService: PackagesService,
+  ) {}
 
   @Mutation('addUserToPackage')
   async addUserToPackage(@Args('input') input: INewUserOnPackage) {
@@ -12,5 +20,20 @@ export class UserOnPackageResolver {
     return {
       ...entity,
     };
+  }
+
+  @Query('packagesForUser')
+  async packagesForUser(@Args('userId') userId: string) {
+    return await this.userOnPackageService.packagesForUser(userId);
+  }
+
+  @ResolveField('user')
+  async user(@Parent() userOnPackage: UserOnPackage) {
+    return await this.usersService.findOne(userOnPackage.userId);
+  }
+
+  @ResolveField('package')
+  async package(@Parent() userOnPackage: UserOnPackage) {
+    return await this.packagesService.findOne(userOnPackage.packageId);
   }
 }

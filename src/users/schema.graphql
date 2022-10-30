@@ -10,6 +10,7 @@ type IUser {
 }
 
 type IPublicUser {
+    id: ID!
     username: String!
 }
 

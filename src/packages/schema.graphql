@@ -1,0 +1,33 @@
+type IPackage {
+    id: ID!
+    name: String!
+    createdAt: Date!
+    updatedAt: Date!
+    foreignLanguage: String!
+    translatedLanguage: String!
+#    groups: [IGroup!]!
+#    users : [IUserOnPackage!]!
+}
+
+input INewPackage {
+    name: String!
+    foreignLanguage: String!
+    translatedLanguage: String!
+}
+
+input IUpdatePackage {
+    id: ID!
+    name: String
+    foreignLanguage: String
+    translatedLanguage: String
+}
+
+type Query {
+    packageById(id: ID!): IPackage
+}
+
+type Mutation {
+    createPackage (input: INewPackage): IPackage!
+    updatePackage (input: IUpdatePackage): IPackage!
+    deletePackage (id: ID): IPackage!
+}

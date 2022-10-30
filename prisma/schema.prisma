@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Vocabulary {
+  id          String      @id @default(uuid())
+  name        String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  active      Boolean     @default(true)
+  favorite    Boolean     @default(false)
+  isKnown     Boolean     @default(false)
+  groupId     String
+  group       Group       @relation(fields: [groupId], references: [id])
+  categorie   SpeechPart?
+  description String?
+  sentence    String?
+}
+
+model Package {
+  id                 String          @id @default(uuid())
+  name               String
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  foreignLanguage    String
+  translatedLanguage String
+  usersOnPackage     UserOnPackage[]
+  groups             Group[]
+}
+
+model Group {
+  id           String       @id @default(uuid())
+  name         String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  active       Boolean      @default(true)
+  packageId    String
+  package      Package      @relation(fields: [packageId], references: [id])
+  description  String?
+  vocabularies Vocabulary[]
+}
+
+model User {
+  id             String          @id @default(uuid())
+  username       String
+  mail           String          @unique
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  userOnPackages UserOnPackage[]
+  disabled       Boolean         @default(false)
+}
+
+model UserOnPackage {
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  packageId        String
+  package          Package      @relation(fields: [packageId], references: [id])
+  assignedAt       DateTime?    @default(now())
+  assignedByUserId String?
+  packageRight     PackageRight
+
+  @@id([userId, packageId])
+}
+
+enum PackageRight {
+  VIEW
+  EDIT
+  ADMIN
+}
+
+enum SpeechPart {
+  NOUN
+  PRONOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PREPOSITION
+  CONJUNCTION
+  INTERJECTION
+}

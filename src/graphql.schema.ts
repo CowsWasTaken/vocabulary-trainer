@@ -56,6 +56,7 @@ export interface IUpdatePackage {
 export interface INewUserOnPackage {
     userId: string;
     packageId: string;
+    packageRight: PackageRight;
 }
 
 export interface INewUser {
@@ -118,7 +119,7 @@ export interface IMutation {
     createPackage(input?: Nullable<INewPackage>): IPackage | Promise<IPackage>;
     updatePackage(input?: Nullable<IUpdatePackage>): IPackage | Promise<IPackage>;
     deletePackage(id?: Nullable<string>): IPackage | Promise<IPackage>;
-    createNewUserOnPackage(input?: Nullable<INewUserOnPackage>): Nullable<number> | Promise<Nullable<number>>;
+    addUserToPackage(input?: Nullable<INewUserOnPackage>): IUserOnPackage | Promise<IUserOnPackage>;
     createUser(input?: Nullable<INewUser>): IUser | Promise<IUser>;
     updateUser(input?: Nullable<IUpdateUser>): IUser | Promise<IUser>;
     deleteUser(id?: Nullable<string>): IUser | Promise<IUser>;

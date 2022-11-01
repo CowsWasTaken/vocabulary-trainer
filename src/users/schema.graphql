@@ -5,8 +5,7 @@ type IUser {
     username: String!
     disabled: Boolean
     mail: String!
-    packages: [IPackage!]
-#    userOnPackages: [IUserOnPackage!]!
+    userOnPackages: [IUserOnPackage!]
 }
 
 type IPublicUser {

@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -157,7 +158,7 @@ export interface IUser {
     username: string;
     disabled?: Nullable<boolean>;
     mail: string;
-    packages?: Nullable<IPackage[]>;
+    userOnPackages?: Nullable<IUserOnPackage[]>;
 }
 
 export interface IPublicUser {

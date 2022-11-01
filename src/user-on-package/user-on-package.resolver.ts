@@ -5,12 +5,15 @@ import { Parent } from '@nestjs/graphql';
 import { UserOnPackage } from '@prisma/client';
 import { UsersService } from '../users/users.service';
 import { PackagesService } from '../packages/packages.service';
+import { forwardRef, Inject } from '@nestjs/common';
 
 @Resolver('IUserOnPackage')
 export class UserOnPackageResolver {
   constructor(
     private userOnPackageService: UserOnPackageService,
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
+    @Inject(forwardRef(() => PackagesService))
     private packagesService: PackagesService,
   ) {}
 

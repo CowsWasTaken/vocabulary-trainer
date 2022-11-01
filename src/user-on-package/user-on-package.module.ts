@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UserOnPackageService } from './user-on-package.service';
 import { UserOnPackageResolver } from './user-on-package.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -7,6 +7,11 @@ import { PackagesModule } from '../packages/packages.module';
 
 @Module({
   providers: [UserOnPackageService, UserOnPackageResolver],
-  imports: [PrismaModule, PackagesModule, UsersModule],
+  imports: [
+    PrismaModule,
+    forwardRef(() => PackagesModule),
+    forwardRef(() => UsersModule),
+  ],
+  exports: [UserOnPackageService],
 })
 export class UserOnPackageModule {}

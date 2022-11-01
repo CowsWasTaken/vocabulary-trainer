@@ -100,6 +100,7 @@ export interface IGroup {
     updatedAt: Date;
     active: boolean;
     packageId: string;
+    package: IPackage;
     description?: Nullable<string>;
 }
 

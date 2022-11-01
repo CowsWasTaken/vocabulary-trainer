@@ -27,7 +27,7 @@ export class UserOnPackageResolver {
 
   @Query('packagesForUser')
   async packagesForUser(@Args('userId') userId: string) {
-    return await this.userOnPackageService.packagesForUser(userId);
+    return await this.userOnPackageService.findForUser(userId);
   }
 
   @ResolveField('user')

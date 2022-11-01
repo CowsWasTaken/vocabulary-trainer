@@ -137,6 +137,7 @@ export interface IPackage {
     updatedAt: Date;
     foreignLanguage: string;
     translatedLanguage: string;
+    userOnPackage: IUserOnPackage[];
 }
 
 export interface IUserOnPackage {

@@ -6,7 +6,7 @@ type IPackage {
     foreignLanguage: String!
     translatedLanguage: String!
 #    groups: [IGroup!]!
-#    users : [IUserOnPackage!]!
+    userOnPackage : [IUserOnPackage!]!
 }
 
 input INewPackage {

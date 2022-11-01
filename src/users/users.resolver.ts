@@ -30,7 +30,7 @@ export class UsersResolver {
 
   @ResolveField('userOnPackages')
   async userOnPackages(@Parent() user: User) {
-    return await this.userOnPackageService.packagesForUser(user.id);
+    return await this.userOnPackageService.findForUser(user.id);
   }
 
   @Mutation('createUser')

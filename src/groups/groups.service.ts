@@ -41,4 +41,12 @@ export class GroupsService {
       },
     });
   }
+
+  async findForPackage(packageId: string) {
+    return this.prisma.group.findMany({
+      where: {
+        packageId,
+      },
+    });
+  }
 }

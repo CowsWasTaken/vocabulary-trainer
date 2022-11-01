@@ -5,7 +5,7 @@ type IPackage {
     updatedAt: Date!
     foreignLanguage: String!
     translatedLanguage: String!
-#    groups: [IGroup!]!
+    groups: [IGroup!]!
     userOnPackage : [IUserOnPackage!]!
 }
 

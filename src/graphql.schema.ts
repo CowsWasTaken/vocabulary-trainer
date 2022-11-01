@@ -138,6 +138,7 @@ export interface IPackage {
     updatedAt: Date;
     foreignLanguage: string;
     translatedLanguage: string;
+    groups: IGroup[];
     userOnPackage: IUserOnPackage[];
 }
 

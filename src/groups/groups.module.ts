@@ -7,5 +7,6 @@ import { PackagesModule } from '../packages/packages.module';
 @Module({
   providers: [GroupsService, GroupsResolver],
   imports: [PrismaModule, forwardRef(() => PackagesModule)],
+  exports: [GroupsService],
 })
 export class GroupsModule {}

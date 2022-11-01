@@ -10,6 +10,7 @@ import { INewPackage, IUpdatePackage } from '../graphql.schema';
 import { Package } from '@prisma/client';
 import { forwardRef, Inject } from '@nestjs/common';
 import { UserOnPackageService } from '../user-on-package/user-on-package.service';
+import { GroupsService } from '../groups/groups.service';
 
 @Resolver('IPackage')
 export class PackagesResolver {
@@ -17,6 +18,8 @@ export class PackagesResolver {
     private packageService: PackagesService,
     @Inject(forwardRef(() => UserOnPackageService))
     private userOnPackageService: UserOnPackageService,
+    @Inject(forwardRef(() => GroupsService))
+    private readonly groupsService: GroupsService,
   ) {}
 
   @Mutation('createPackage')
@@ -46,5 +49,10 @@ export class PackagesResolver {
   @ResolveField('userOnPackage')
   async userOnPackage(@Parent() packageEntity: Package) {
     return await this.userOnPackageService.findForPackage(packageEntity.id);
+  }
+
+  @ResolveField('groups')
+  async resolveGroups(@Parent() packageEntity: Package) {
+    return await this.groupsService.findForPackage(packageEntity.id);
   }
 }

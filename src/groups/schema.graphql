@@ -7,7 +7,7 @@ type IGroup {
     packageId: ID!
     package: IPackage!
     description: String
-#    vocabularies: [IVocabulary!]!
+    vocabularies: [IVocabulary!]!
 }
 
 input INewGroup {

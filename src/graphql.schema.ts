@@ -105,6 +105,7 @@ export interface IGroup {
     packageId: string;
     package: IPackage;
     description?: Nullable<string>;
+    vocabularies: IVocabulary[];
 }
 
 export interface IQuery {

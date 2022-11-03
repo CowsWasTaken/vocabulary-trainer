@@ -11,6 +11,7 @@ import { INewGroup, IUpdateGroup } from '../graphql.schema';
 import { forwardRef, Inject } from '@nestjs/common';
 import { PackagesService } from '../packages/packages.service';
 import { Group } from '@prisma/client';
+import { VocabulariesService } from '../vocabularies/vocabularies.service';
 
 @Resolver('IGroup')
 export class GroupsResolver {
@@ -18,6 +19,8 @@ export class GroupsResolver {
     private readonly groupsService: GroupsService,
     @Inject(forwardRef(() => PackagesService))
     private readonly packagesService: PackagesService,
+    @Inject(forwardRef(() => VocabulariesService))
+    private readonly vocabulariesService: VocabulariesService,
   ) {}
 
   @Mutation('createGroup')
@@ -43,5 +46,10 @@ export class GroupsResolver {
   @ResolveField('package')
   async resolvePackage(@Parent() group: Group) {
     return await this.packagesService.findOne(group.packageId);
+  }
+
+  @ResolveField('vocabularies')
+  async resolveVocabularies(@Parent() group: Group) {
+    return await this.vocabulariesService.findForGroup(group.id);
   }
 }

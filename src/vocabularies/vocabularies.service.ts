@@ -40,4 +40,12 @@ export class VocabulariesService {
       },
     });
   }
+
+  async findForGroup(groupId: string) {
+    return this.prisma.vocabulary.findMany({
+      where: {
+        groupId,
+      },
+    });
+  }
 }

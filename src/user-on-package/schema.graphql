@@ -20,9 +20,8 @@ type Query {
 
 
 type Mutation {
-    addUserToPackage (input: INewUserOnPackage): IUserOnPackage!
-    #    updateGroup (input: IUpdateGroup): IGroup!
-    #    deleteGroup (id: ID): IGroup!
+    addUserToPackage (input: INewUserOnPackage!): IUserOnPackage!
+    removeUserFromPackage(userId: ID!, packageId: ID!): IUserOnPackage!
 }
 
 enum PackageRight {

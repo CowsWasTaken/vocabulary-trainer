@@ -124,7 +124,8 @@ export interface IMutation {
     createPackage(input?: Nullable<INewPackage>): IPackage | Promise<IPackage>;
     updatePackage(input?: Nullable<IUpdatePackage>): IPackage | Promise<IPackage>;
     deletePackage(id?: Nullable<string>): IPackage | Promise<IPackage>;
-    addUserToPackage(input?: Nullable<INewUserOnPackage>): IUserOnPackage | Promise<IUserOnPackage>;
+    addUserToPackage(input: INewUserOnPackage): IUserOnPackage | Promise<IUserOnPackage>;
+    removeUserFromPackage(userId: string, packageId: string): IUserOnPackage | Promise<IUserOnPackage>;
     createUser(input?: Nullable<INewUser>): IUser | Promise<IUser>;
     updateUser(input?: Nullable<IUpdateUser>): IUser | Promise<IUser>;
     deleteUser(id?: Nullable<string>): IUser | Promise<IUser>;

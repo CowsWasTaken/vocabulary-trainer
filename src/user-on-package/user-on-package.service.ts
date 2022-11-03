@@ -45,4 +45,15 @@ export class UserOnPackageService {
       },
     });
   }
+
+  async removeUserFromPackage(userId: string, packageId: string) {
+    return this.prisma.userOnPackage.delete({
+      where: {
+        userId_packageId: {
+          packageId,
+          userId,
+        },
+      },
+    });
+  }
 }

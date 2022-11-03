@@ -39,4 +39,17 @@ export class UserOnPackageResolver {
   async package(@Parent() userOnPackage: UserOnPackage) {
     return await this.packagesService.findOne(userOnPackage.packageId);
   }
+
+  @Mutation('removeUserFromPackage')
+  async removeUserFromPackage(
+    @Args('userId') userId: string,
+    @Args('packageId') packageId: string,
+  ) {
+    const entity = await this.userOnPackageService.removeUserFromPackage(
+      userId,
+      packageId,
+    );
+    console.log(entity);
+    return entity;
+  }
 }

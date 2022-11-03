@@ -71,7 +71,8 @@ export interface IUpdateUser {
 }
 
 export interface INewVocabulary {
-    name: string;
+    foreignWord: string;
+    translatedWord: string;
     groupId: string;
     active?: Nullable<boolean>;
     favorite?: Nullable<boolean>;
@@ -83,7 +84,9 @@ export interface INewVocabulary {
 
 export interface IUpdateVocabulary {
     id: string;
-    name?: Nullable<string>;
+    foreignWord?: Nullable<string>;
+    translatedWord?: Nullable<string>;
+    groupId?: Nullable<string>;
     active?: Nullable<boolean>;
     favorite?: Nullable<boolean>;
     isKnown?: Nullable<boolean>;
@@ -173,7 +176,8 @@ export interface IPublicUser {
 export interface IVocabulary {
     __typename?: 'IVocabulary';
     id: string;
-    name: string;
+    foreignWord: string;
+    translatedWord: string;
     updatedAt: Date;
     createdAt: Date;
     active: boolean;
@@ -182,6 +186,8 @@ export interface IVocabulary {
     categorie?: Nullable<SpeechPart>;
     description?: Nullable<string>;
     sentence?: Nullable<string>;
+    groupId: string;
+    group: IGroup;
 }
 
 type Nullable<T> = T | null;

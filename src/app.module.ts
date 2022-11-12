@@ -8,6 +8,7 @@ import { VocabulariesModule } from './vocabularies/vocabularies.module';
 import { PackagesModule } from './packages/packages.module';
 import { GroupsModule } from './groups/groups.module';
 import { UserOnPackageModule } from './user-on-package/user-on-package.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserOnPackageModule } from './user-on-package/user-on-package.module';
     PackagesModule,
     GroupsModule,
     UserOnPackageModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

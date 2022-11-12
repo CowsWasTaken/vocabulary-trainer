@@ -15,6 +15,7 @@ type IPublicUser {
 
 input INewUser {
     username: String!
+    password: String!
     mail: String!
 }
 

@@ -61,6 +61,7 @@ export interface INewUserOnPackage {
 
 export interface INewUser {
     username: string;
+    password: string;
     mail: string;
 }
 

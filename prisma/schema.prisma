@@ -52,6 +52,7 @@ model Group {
 model User {
   id             String          @id @default(uuid())
   username       String
+  password       String
   mail           String          @unique
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt

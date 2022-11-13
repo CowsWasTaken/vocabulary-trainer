@@ -23,7 +23,8 @@
     "prisma:migrate": "npx prisma migrate dev --name init",
     "prisma:push": "npx prisma db push",
     "prisma:format": "npx prisma format",
-    "generate:typings": "ts-node generator/generate-typings.ts"
+    "generate:typings": "ts-node generator/generate-typings.ts",
+    "db:start": "docker-compose up"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.3",

@@ -114,7 +114,7 @@ export interface IQuery {
     groupById(id: string): Nullable<IGroup> | Promise<Nullable<IGroup>>;
     packageById(id: string): Nullable<IPackage> | Promise<Nullable<IPackage>>;
     packagesForUser(userId: string): IUserOnPackage[] | Promise<IUserOnPackage[]>;
-    me(input: string): IUser | Promise<IUser>;
+    me(): IUser | Promise<IUser>;
     vocabularyById(id: string): Nullable<IVocabulary> | Promise<Nullable<IVocabulary>>;
 }
 

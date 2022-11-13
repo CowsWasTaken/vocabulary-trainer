@@ -1,11 +1,15 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthGuard } from '@nestjs/passport';
-import { LocalAuthGuard } from './auth/local-auth.guard';
+import { LocalAuthGuard } from './auth/local/local-auth.guard';
+import { AuthService } from './auth/auth.service';
+import { SkipAuth } from './auth/decorator/skip-auth.decorator';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private authService: AuthService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -14,7 +18,8 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Body() userLogin: { username: string; password: string }) {
-    return { loginSuccessful: true };
+  @SkipAuth()
+  async login(@Req() req) {
+    return this.authService.login(req.user.username);
   }
 }

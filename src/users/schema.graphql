@@ -15,6 +15,7 @@ type IPublicUser {
 
 input INewUser {
     username: String!
+    password: String!
     mail: String!
 }
 
@@ -25,7 +26,7 @@ input IUpdateUser {
 }
 
 type Query {
-    me(input: ID!): IUser!
+    me: IUser!
 }
 
 type Mutation {

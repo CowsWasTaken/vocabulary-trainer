@@ -5,8 +5,8 @@ type IPackage {
     updatedAt: Date!
     foreignLanguage: String!
     translatedLanguage: String!
-#    groups: [IGroup!]!
-#    users : [IUserOnPackage!]!
+    groups: [IGroup!]!
+    userOnPackage : [IUserOnPackage!]!
 }
 
 input INewPackage {

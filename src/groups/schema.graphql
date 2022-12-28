@@ -5,9 +5,9 @@ type IGroup {
     updatedAt: Date!
     active: Boolean!
     packageId: ID!
-#    package: IPackage!
+    package: IPackage!
     description: String
-#    vocabularies: [IVocabulary!]!
+    vocabularies: [IVocabulary!]!
 }
 
 input INewGroup {

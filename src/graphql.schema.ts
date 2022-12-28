@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -60,6 +61,7 @@ export interface INewUserOnPackage {
 
 export interface INewUser {
     username: string;
+    password: string;
     mail: string;
 }
 
@@ -70,7 +72,8 @@ export interface IUpdateUser {
 }
 
 export interface INewVocabulary {
-    name: string;
+    foreignWord: string;
+    translatedWord: string;
     groupId: string;
     active?: Nullable<boolean>;
     favorite?: Nullable<boolean>;
@@ -82,7 +85,9 @@ export interface INewVocabulary {
 
 export interface IUpdateVocabulary {
     id: string;
-    name?: Nullable<string>;
+    foreignWord?: Nullable<string>;
+    translatedWord?: Nullable<string>;
+    groupId?: Nullable<string>;
     active?: Nullable<boolean>;
     favorite?: Nullable<boolean>;
     isKnown?: Nullable<boolean>;
@@ -99,7 +104,9 @@ export interface IGroup {
     updatedAt: Date;
     active: boolean;
     packageId: string;
+    package: IPackage;
     description?: Nullable<string>;
+    vocabularies: IVocabulary[];
 }
 
 export interface IQuery {
@@ -107,7 +114,7 @@ export interface IQuery {
     groupById(id: string): Nullable<IGroup> | Promise<Nullable<IGroup>>;
     packageById(id: string): Nullable<IPackage> | Promise<Nullable<IPackage>>;
     packagesForUser(userId: string): IUserOnPackage[] | Promise<IUserOnPackage[]>;
-    me(input: string): IUser | Promise<IUser>;
+    me(): IUser | Promise<IUser>;
     vocabularyById(id: string): Nullable<IVocabulary> | Promise<Nullable<IVocabulary>>;
 }
 
@@ -119,7 +126,8 @@ export interface IMutation {
     createPackage(input?: Nullable<INewPackage>): IPackage | Promise<IPackage>;
     updatePackage(input?: Nullable<IUpdatePackage>): IPackage | Promise<IPackage>;
     deletePackage(id?: Nullable<string>): IPackage | Promise<IPackage>;
-    addUserToPackage(input?: Nullable<INewUserOnPackage>): IUserOnPackage | Promise<IUserOnPackage>;
+    addUserToPackage(input: INewUserOnPackage): IUserOnPackage | Promise<IUserOnPackage>;
+    removeUserFromPackage(userId: string, packageId: string): IUserOnPackage | Promise<IUserOnPackage>;
     createUser(input?: Nullable<INewUser>): IUser | Promise<IUser>;
     updateUser(input?: Nullable<IUpdateUser>): IUser | Promise<IUser>;
     deleteUser(id?: Nullable<string>): IUser | Promise<IUser>;
@@ -136,6 +144,8 @@ export interface IPackage {
     updatedAt: Date;
     foreignLanguage: string;
     translatedLanguage: string;
+    groups: IGroup[];
+    userOnPackage: IUserOnPackage[];
 }
 
 export interface IUserOnPackage {
@@ -157,7 +167,7 @@ export interface IUser {
     username: string;
     disabled?: Nullable<boolean>;
     mail: string;
-    packages?: Nullable<IPackage[]>;
+    userOnPackages?: Nullable<IUserOnPackage[]>;
 }
 
 export interface IPublicUser {
@@ -169,7 +179,8 @@ export interface IPublicUser {
 export interface IVocabulary {
     __typename?: 'IVocabulary';
     id: string;
-    name: string;
+    foreignWord: string;
+    translatedWord: string;
     updatedAt: Date;
     createdAt: Date;
     active: boolean;
@@ -178,6 +189,8 @@ export interface IVocabulary {
     categorie?: Nullable<SpeechPart>;
     description?: Nullable<string>;
     sentence?: Nullable<string>;
+    groupId: string;
+    group: IGroup;
 }
 
 type Nullable<T> = T | null;

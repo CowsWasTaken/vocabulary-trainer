@@ -1,6 +1,7 @@
 type IVocabulary {
     id: ID!
-    name: String!
+    foreignWord: String!
+    translatedWord: String!
     updatedAt: Date!
     createdAt: Date!
     active: Boolean!
@@ -9,10 +10,13 @@ type IVocabulary {
     categorie: SpeechPart
     description: String
     sentence: String
+    groupId: ID!
+    group: IGroup!
 }
 
 input INewVocabulary {
-    name: String!
+    foreignWord: String!
+    translatedWord: String!
     groupId: ID!
     active: Boolean
     favorite: Boolean
@@ -24,7 +28,9 @@ input INewVocabulary {
 
 input IUpdateVocabulary {
     id: ID!
-    name: String
+    foreignWord: String
+    translatedWord: String
+    groupId: ID
     active: Boolean
     favorite: Boolean
     isKnown: Boolean

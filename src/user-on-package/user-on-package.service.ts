@@ -30,10 +30,29 @@ export class UserOnPackageService {
     });
   }
 
-  async packagesForUser(userId: string) {
+  async findForUser(userId: string) {
     return this.prisma.userOnPackage.findMany({
       where: {
         userId,
+      },
+    });
+  }
+
+  async findForPackage(packageId: string) {
+    return this.prisma.userOnPackage.findMany({
+      where: {
+        packageId,
+      },
+    });
+  }
+
+  async removeUserFromPackage(userId: string, packageId: string) {
+    return this.prisma.userOnPackage.delete({
+      where: {
+        userId_packageId: {
+          packageId,
+          userId,
+        },
       },
     });
   }
